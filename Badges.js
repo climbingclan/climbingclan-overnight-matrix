@@ -24,10 +24,10 @@ let row = sheet.getLastRow();
 sheet.getRange(row, 1, 2, 24).setFontWeight("bold");
 
 if (flip==="badges") {
- var results = stmt.executeQuery('select "Given Badge", `first_name` "First Name",`nickname` "Facebook Name",stats_volunteer_for_numerator_cached "Volunteered For",db.id "Clan ID" from wp_member_db db JOIN wp_order_product_customer_lookup pd on pd.user_id = db.id where product_id=' + cell + '  AND status in ("wc-processing", "wc-onhold", "wc-on-hold") AND ((`stats_volunteer_for_numerator_cached`>=3) OR (`stats_volunteer_for_numerator_cached`=2 AND pd.cc_volunteer<>"none")) AND ((milestones_3_badge IS NULL) OR (milestones_3_badge ="due")) order by `first_name`,CAST(db.stats_volunteer_for_numerator_cached AS UNSIGNED INTEGER) desc')
+ var results = stmt.executeQuery('select "Given Badge", db.`first_name` "First Name",`nickname` "Facebook Name",stats_volunteer_for_numerator_cached "Volunteered For",db.id "Clan ID" from wp_member_db db JOIN wp_order_product_customer_lookup pd on pd.user_id = db.id where product_id=' + cell + '  AND status in ("wc-processing", "wc-onhold", "wc-on-hold") AND ((`stats_volunteer_for_numerator_cached`>=3) OR (`stats_volunteer_for_numerator_cached`=2 AND pd.cc_volunteer<>"none")) AND ((milestones_3_badge IS NULL) OR (milestones_3_badge ="due")) order by db.`first_name`,CAST(db.stats_volunteer_for_numerator_cached AS UNSIGNED INTEGER) desc')
 }
 else if (flip==="nonbadges"){
- var results = stmt.executeQuery('select "Given Badge", `first_name` "First Name",`nickname` "Facebook Name",milestones_3_badge_marked_given_by "Given by",FROM_UNIXTIME((milestones_3_badge_marked_given_at)/1000, "%d %M %Y") "Given on" from wp_member_db db JOIN wp_order_product_customer_lookup pd on pd.user_id = db.id where product_id=' + cell + '  AND status in ("wc-processing", "wc-onhold", "wc-on-hold") AND milestones_3_badge="given" order by `first_name`,CAST(db.stats_volunteer_for_numerator_cached AS UNSIGNED INTEGER) desc')
+ var results = stmt.executeQuery('select "Given Badge", db.`first_name` "First Name",`nickname` "Facebook Name",milestones_3_badge_marked_given_by "Given by",FROM_UNIXTIME((milestones_3_badge_marked_given_at)/1000, "%d %M %Y") "Given on" from wp_member_db db JOIN wp_order_product_customer_lookup pd on pd.user_id = db.id where product_id=' + cell + '  AND status in ("wc-processing", "wc-onhold", "wc-on-hold") AND milestones_3_badge="given" order by db.`first_name`,CAST(db.stats_volunteer_for_numerator_cached AS UNSIGNED INTEGER) desc')
 }
 
   //console.log(results);
