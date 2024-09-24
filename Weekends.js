@@ -1,13 +1,14 @@
-var server = '18.168.242.164';
-var port = 3306;
-var dbName = 'bitnami_wordpress';
-var username = 'gsheets';
-var password = 'eyai4yohF4uX8eeP7phoob';
-var url = 'jdbc:mysql://'+server+':'+port+'/'+dbName;
-var volcol = 26;
-var apidomain="climbingclan.com"
-var apiusername="ck_3f8cd172e7aed36533d434e04e8c0b2affe19075"
-var apipassword="cs_817f3cd22ae28bc33fa716a6fdfd707188c0409b"
+const scriptProperties = PropertiesService.getScriptProperties();
+
+const server = scriptProperties.getProperty('cred_server');
+const port = parseInt(scriptProperties.getProperty('cred_port'), 10);
+const dbName = scriptProperties.getProperty('cred_dbName');
+const username = scriptProperties.getProperty('cred_username');
+const password = scriptProperties.getProperty('cred_password');
+const url = `jdbc:mysql://${server}:${port}/${dbName}`;
+const apidomain = scriptProperties.getProperty('cred_apidomain');
+const apiusername = scriptProperties.getProperty('cred_apiusername');
+const apipassword = scriptProperties.getProperty('cred_apipassword');
 
 
 function readData() {
@@ -24,5 +25,5 @@ function readData() {
  badgesData();
  readAdmin();
  readGrades();
-} 
+}
 
